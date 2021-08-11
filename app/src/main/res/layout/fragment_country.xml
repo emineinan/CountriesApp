@@ -1,14 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.CountryFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".view.CountryFragment">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/imageViewCountry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:minHeight="200dp"
+            android:scaleType="fitCenter">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/textViewCountryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageViewCountry"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="7dp"
+            android:textSize="20sp"
+            android:textStyle="bold">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/textViewCapital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewCountryName"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="7dp"
+            android:textSize="20sp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/textViewCountryRegion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewCapital"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="7dp"
+            android:textSize="20sp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/textViewCurrency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewCountryRegion"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="7dp"
+            android:textSize="20sp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/textViewLanguage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewCurrency"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="7dp"
+            android:textSize="20sp">
+        </TextView>
+
+    </RelativeLayout>
+</layout>
