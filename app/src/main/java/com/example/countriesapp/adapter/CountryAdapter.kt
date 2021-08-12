@@ -6,6 +6,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.countriesapp.databinding.RowItemBinding
 import com.example.countriesapp.model.Country
+import com.example.countriesapp.util.downloadFromUrl
+import com.example.countriesapp.util.placeholderProgressBar
 import com.example.countriesapp.view.FeedFragmentDirections
 
 class CountryAdapter : RecyclerView.Adapter<CountryAdapter.MyViewHolder>() {
@@ -32,6 +34,11 @@ class CountryAdapter : RecyclerView.Adapter<CountryAdapter.MyViewHolder>() {
             val action = FeedFragmentDirections.actionFeedFragmentToCountryFragment()
             Navigation.findNavController(it).navigate(action)
         }
+
+        holder.binding.imageViewCountries.downloadFromUrl(
+            currentItem.imageUrl,
+            placeholderProgressBar(holder.binding.root.context)
+        )
     }
 
     fun updateCountryList(newCountryList: List<Country>) {
