@@ -2,9 +2,11 @@ package com.example.countriesapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.countriesapp.databinding.RowItemBinding
 import com.example.countriesapp.model.Country
+import com.example.countriesapp.view.FeedFragmentDirections
 
 class CountryAdapter : RecyclerView.Adapter<CountryAdapter.MyViewHolder>() {
     private var countryList = emptyList<Country>()
@@ -26,6 +28,10 @@ class CountryAdapter : RecyclerView.Adapter<CountryAdapter.MyViewHolder>() {
         val currentItem = countryList[position]
         holder.binding.textViewName.text = currentItem.countryName
         holder.binding.textViewRegion.text = currentItem.countryRegion
+        holder.binding.root.setOnClickListener {
+            val action = FeedFragmentDirections.actionFeedFragmentToCountryFragment()
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
     fun updateCountryList(newCountryList: List<Country>) {
