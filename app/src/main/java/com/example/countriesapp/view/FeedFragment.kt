@@ -1,58 +1,73 @@
 package com.example.countriesapp.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.countriesapp.R
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.countriesapp.adapter.CountryAdapter
+import com.example.countriesapp.databinding.FragmentFeedBinding
+import com.example.countriesapp.viewmodel.FeedViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FeedFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FeedFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentFeedBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private val feedViewModel: FeedViewModel by viewModels<FeedViewModel>()
+    private val countryAdapter = CountryAdapter()
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentFeedBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_feed, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        feedViewModel.refreshData()
+
+        binding.recyclerViewCountries.layoutManager = LinearLayoutManager(context)
+        binding.recyclerViewCountries.adapter = countryAdapter
+
+        observeLiveData()
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FeedFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-                FeedFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
+    private fun observeLiveData() {
+        feedViewModel.countries.observe(viewLifecycleOwner, Observer { countries ->
+
+            countries?.let {
+                binding.recyclerViewCountries.visibility = View.VISIBLE
+                countryAdapter.updateCountryList(countries)
+            }
+
+        })
+
+        feedViewModel.countryErrorMessage.observe(viewLifecycleOwner, Observer { error ->
+            error?.let {
+                if (it) {
+                    binding.textViewErrorMessage.visibility = View.VISIBLE
+                } else {
+                    binding.textViewErrorMessage.visibility = View.GONE
                 }
+            }
+        })
+
+        feedViewModel.countryLoading.observe(viewLifecycleOwner, Observer { loading ->
+            loading?.let {
+                if (it) {
+                    binding.recyclerViewCountries.visibility = View.VISIBLE
+                    binding.progressBarCountry.visibility = View.GONE
+                    binding.textViewErrorMessage.visibility = View.GONE
+                } else {
+                    binding.progressBarCountry.visibility = View.GONE
+                }
+            }
+        })
     }
 }
