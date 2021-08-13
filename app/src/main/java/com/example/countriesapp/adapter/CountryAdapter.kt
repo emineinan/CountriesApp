@@ -31,7 +31,7 @@ class CountryAdapter : RecyclerView.Adapter<CountryAdapter.MyViewHolder>() {
         holder.binding.textViewName.text = currentItem.countryName
         holder.binding.textViewRegion.text = currentItem.countryRegion
         holder.binding.root.setOnClickListener {
-            val action = FeedFragmentDirections.actionFeedFragmentToCountryFragment()
+            val action = FeedFragmentDirections.actionFeedFragmentToCountryFragment(currentItem.id)
             Navigation.findNavController(it).navigate(action)
         }
 
