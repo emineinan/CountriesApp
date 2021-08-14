@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -9,82 +10,98 @@
             type="com.example.countriesapp.model.Country" />
     </data>
 
-    <RelativeLayout
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.CountryFragment">
+        android:layout_margin="5dp"
+        android:foregroundGravity="center"
+        android:padding="15dp"
+        app:cardBackgroundColor="@color/beige"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true">
 
-        <ImageView
-            android:id="@+id/imageViewCountry"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:downloadCountryImage="@{selectedCountry.imageUrl}"
-            android:minHeight="200dp"
-            android:scaleType="fitCenter">
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="70dp"
+            tools:context=".view.CountryFragment">
 
-        </ImageView>
+            <ImageView
+                android:id="@+id/imageViewCountry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_margin="20dp"
+                android:downloadCountryImage="@{selectedCountry.imageUrl}"
+                android:minHeight="200dp"
+                android:padding="10dp"
+                android:scaleType="fitCenter">
 
-        <TextView
-            android:id="@+id/textViewCountryName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/imageViewCountry"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="7dp"
-            android:text="@{selectedCountry.countryName}"
-            android:textSize="20sp"
-            android:textStyle="bold">
+            </ImageView>
 
-        </TextView>
+            <TextView
+                android:id="@+id/textViewCountryName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageViewCountry"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"
+                android:text="@{selectedCountry.countryName}"
+                android:textSize="20sp"
+                android:textStyle="bold">
 
-        <TextView
-            android:id="@+id/textViewCapital"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewCountryName"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="7dp"
-            android:text="@{selectedCountry.countryCapital}"
-            android:textSize="20sp">
+            </TextView>
 
-        </TextView>
+            <TextView
+                android:id="@+id/textViewCapital"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewCountryName"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"
+                android:text="@{selectedCountry.countryCapital}"
+                android:textSize="20sp">
 
-        <TextView
-            android:id="@+id/textViewCountryRegion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewCapital"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="7dp"
-            android:text="@{selectedCountry.countryRegion}"
-            android:textSize="20sp">
+            </TextView>
 
-        </TextView>
+            <TextView
+                android:id="@+id/textViewCountryRegion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewCapital"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"
+                android:text="@{selectedCountry.countryRegion}"
+                android:textSize="20sp">
 
-        <TextView
-            android:id="@+id/textViewCurrency"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewCountryRegion"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="7dp"
-            android:text="@{selectedCountry.countryCurrency}"
-            android:textSize="20sp">
+            </TextView>
 
-        </TextView>
+            <TextView
+                android:id="@+id/textViewCurrency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewCountryRegion"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"
+                android:text="@{selectedCountry.countryCurrency}"
+                android:textSize="20sp">
 
-        <TextView
-            android:id="@+id/textViewLanguage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewCurrency"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="7dp"
-            android:text="@{selectedCountry.countryLanguage}"
-            android:textSize="20sp">
+            </TextView>
 
-        </TextView>
+            <TextView
+                android:id="@+id/textViewLanguage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewCurrency"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"
+                android:text="@{selectedCountry.countryLanguage}"
+                android:textSize="20sp">
 
-    </RelativeLayout>
+            </TextView>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 </layout>
