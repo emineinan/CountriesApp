@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="selectedCountry"
+            type="com.example.countriesapp.model.Country" />
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -12,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:downloadCountryImage="@{selectedCountry.imageUrl}"
             android:minHeight="200dp"
             android:scaleType="fitCenter">
 
@@ -24,6 +32,7 @@
             android:layout_below="@id/imageViewCountry"
             android:layout_centerHorizontal="true"
             android:layout_margin="7dp"
+            android:text="@{selectedCountry.countryName}"
             android:textSize="20sp"
             android:textStyle="bold">
 
@@ -36,6 +45,7 @@
             android:layout_below="@id/textViewCountryName"
             android:layout_centerHorizontal="true"
             android:layout_margin="7dp"
+            android:text="@{selectedCountry.countryCapital}"
             android:textSize="20sp">
 
         </TextView>
@@ -47,6 +57,7 @@
             android:layout_below="@id/textViewCapital"
             android:layout_centerHorizontal="true"
             android:layout_margin="7dp"
+            android:text="@{selectedCountry.countryRegion}"
             android:textSize="20sp">
 
         </TextView>
@@ -58,6 +69,7 @@
             android:layout_below="@id/textViewCountryRegion"
             android:layout_centerHorizontal="true"
             android:layout_margin="7dp"
+            android:text="@{selectedCountry.countryCurrency}"
             android:textSize="20sp">
 
         </TextView>
@@ -69,7 +81,9 @@
             android:layout_below="@id/textViewCurrency"
             android:layout_centerHorizontal="true"
             android:layout_margin="7dp"
+            android:text="@{selectedCountry.countryLanguage}"
             android:textSize="20sp">
+
         </TextView>
 
     </RelativeLayout>

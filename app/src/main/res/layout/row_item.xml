@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+
+        <variable
+            name="country"
+            type="com.example.countriesapp.model.Country" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -11,7 +18,16 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:padding="3dp"></ImageView>
+            android:contentDescription="@string/country_image"
+            android:downloadCountryImage="@{country.imageUrl}"
+            android:padding="3dp" />
+
+        <TextView
+            android:id="@+id/textViewCountryId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(country.id)}"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -25,14 +41,16 @@
                 android:id="@+id/textViewName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{country.countryName}"
                 android:textSize="20sp"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewRegion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"></TextView>
+                android:text="@{country.countryRegion}"
+                android:textSize="16sp" />
 
         </LinearLayout>
     </LinearLayout>

@@ -1,9 +1,12 @@
 package com.example.countriesapp.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.example.countriesapp.R
 import com.example.countriesapp.databinding.RowItemBinding
 import com.example.countriesapp.model.Country
 import com.example.countriesapp.util.downloadFromUrl
@@ -18,7 +21,12 @@ class CountryAdapter : RecyclerView.Adapter<CountryAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = RowItemBinding.inflate(layoutInflater, parent, false)
+        val binding = DataBindingUtil.inflate<RowItemBinding>(
+            layoutInflater,
+            R.layout.row_item,
+            parent,
+            false
+        )
         return MyViewHolder(binding)
     }
 
@@ -28,17 +36,12 @@ class CountryAdapter : RecyclerView.Adapter<CountryAdapter.MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = countryList[position]
-        holder.binding.textViewName.text = currentItem.countryName
-        holder.binding.textViewRegion.text = currentItem.countryRegion
+        holder.binding.country = currentItem
+
         holder.binding.root.setOnClickListener {
             val action = FeedFragmentDirections.actionFeedFragmentToCountryFragment(currentItem.id)
             Navigation.findNavController(it).navigate(action)
         }
-
-        holder.binding.imageViewCountries.downloadFromUrl(
-            currentItem.imageUrl,
-            placeholderProgressBar(holder.binding.root.context)
-        )
     }
 
     fun updateCountryList(newCountryList: List<Country>) {

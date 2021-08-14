@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -25,7 +26,7 @@ class CountryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCountryBinding.inflate(inflater, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_country, container, false)
         return binding.root
     }
 
@@ -44,12 +45,7 @@ class CountryFragment : Fragment() {
     private fun observeLiveData() {
         countryViewModel.countryLiveData.observe(viewLifecycleOwner, Observer { country ->
             country?.let {
-                binding.textViewCountryName.text = country.countryName
-                binding.textViewCapital.text = country.countryCapital
-                binding.textViewCurrency.text = country.countryCurrency
-                binding.textViewLanguage.text = country.countryLanguage
-                binding.textViewCountryRegion.text = country.countryRegion
-                binding.imageViewCountry.downloadFromUrl(country.imageUrl, placeholderProgressBar(requireContext()))
+                binding.selectedCountry = country
             }
         })
     }
